@@ -2,7 +2,27 @@ import React from "react";
 import { Box, Button, Group, PasswordInput, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
+import signupUser from "api/user";
+
+interface FormValues {
+  email: string;
+  username: string;
+  password: string;
+  confirmPassword: string;
+}
+
 const SampleForm = (): JSX.Element => {
+  const handleSubmit = async (values: FormValues) => {
+    const res = await signupUser(
+      values.username,
+      values.email,
+      values.password,
+      values.confirmPassword,
+    );
+
+    console.log(res.data);
+  };
+
   const form = useForm({
     initialValues: {
       email: "",
@@ -26,7 +46,7 @@ const SampleForm = (): JSX.Element => {
 
   return (
     <Box sx={{ maxWidth: 300 }} mx="auto">
-      <form onSubmit={form.onSubmit((values) => console.log(values))}>
+      <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
         <TextInput
           required
           label="Email"
