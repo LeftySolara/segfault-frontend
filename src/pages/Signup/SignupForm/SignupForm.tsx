@@ -11,8 +11,15 @@ interface FormValues {
 }
 
 const SignupForm = (): JSX.Element => {
-  const handleSubmit = (values: FormValues) => {
-    console.log(values);
+  const handleSubmit = async (values: FormValues) => {
+    const response = await signupUser(
+      values.username,
+      values.email,
+      values.password,
+      values.confirmPassword,
+    );
+
+    console.log(response.data);
   };
 
   const form = useForm({
