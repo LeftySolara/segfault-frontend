@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Button, Group, PasswordInput, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import signupUser from "api/user";
@@ -11,6 +11,8 @@ interface FormValues {
 }
 
 const SignupForm = (): JSX.Element => {
+  const [errorMsg, setErrorMsg] = useState<string>("");
+
   const handleSubmit = async (values: FormValues) => {
     const response = await signupUser(
       values.username,
@@ -19,7 +21,11 @@ const SignupForm = (): JSX.Element => {
       values.confirmPassword,
     );
 
-    console.log(response.data);
+    if (response && response.status !== 201) {
+      setErrorMsg(response.data.message);
+    } else {
+      setErrorMsg("");
+    }
   };
 
   const form = useForm({
@@ -74,6 +80,7 @@ const SignupForm = (): JSX.Element => {
           <Button type="submit">Sign Up</Button>
         </Group>
       </form>
+      {errorMsg && <p>{errorMsg}</p>}
     </Box>
   );
 };

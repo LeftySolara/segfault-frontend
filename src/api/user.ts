@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import axiosClient from "./axiosClient";
 
 /**
@@ -16,12 +17,19 @@ const signupUser = async (
   password: string,
   confirmPassword: string,
 ) => {
-  const res = await axiosClient.post("/users", {
-    username,
-    email,
-    password,
-    confirmPassword,
-  });
+  let res;
+  try {
+    res = await axiosClient.post("/users", {
+      username,
+      email,
+      password,
+      confirmPassword,
+    });
+  } catch (err: unknown) {
+    if (err instanceof AxiosError) {
+      res = err.response;
+    }
+  }
 
   return res;
 };
