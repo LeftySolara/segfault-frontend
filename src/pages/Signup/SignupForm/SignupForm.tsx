@@ -117,14 +117,20 @@ const SignupForm = (): JSX.Element => {
           required
           label="Password"
           placeholder="password"
-          classNames={{ input: classes["text-input"] }}
+          classNames={{
+            innerInput: classes["text-input"],
+            input: classes["text-input"],
+          }}
           {...form.getInputProps("password")}
         />
         <PasswordInput
           required
           label="Confirm Password"
           placeholder="confirm password"
-          classNames={{ input: classes["text-input"] }}
+          classNames={{
+            innerInput: classes["text-input"],
+            input: classes["text-input"],
+          }}
           {...form.getInputProps("confirmPassword")}
         />
 
