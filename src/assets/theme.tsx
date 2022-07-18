@@ -1,5 +1,6 @@
 import { MantineThemeOverride } from "@mantine/core";
 import colors from "./colors";
+import "./fonts.css";
 
 const theme: MantineThemeOverride = {
   // Defines color scheme for all components
@@ -89,7 +90,7 @@ const theme: MantineThemeOverride = {
   primaryShade: 4,
 
   // Font family and line-height used in most components
-  fontFamily: "Proxima Nova, Soleil, Noto Sans, sans-serif",
+  fontFamily: "proxima-nova, soleil, sans-serif",
   lineHeight: 1.14,
 
   // Timing function used for animations
@@ -108,8 +109,8 @@ const theme: MantineThemeOverride = {
 
   // h1-h6 styles, used in Title and TypographyStylesProvider components
   headings: {
-    fontFamily: "Proxima Nova",
-    fontWeight: "semibold",
+    fontFamily: "proxima-nova, soleil, sans-serif;",
+    fontWeight: 600,
     sizes: {
       h1: { fontSize: 72, lineHeight: 1 },
       h2: { fontSize: 60, lineHeight: 1 },

@@ -6,11 +6,14 @@ import {
   createStyles,
   Group,
   PasswordInput,
+  Text,
   TextInput,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
 import signupUser from "api/user";
+
+import "assets/fonts.css";
 
 interface FormValues {
   email: string;
@@ -34,6 +37,7 @@ const useStyles = createStyles((theme) => ({
   },
   form: {
     width: "396px",
+    fontSize: "20px",
   },
   button: {
     width: "128px",
@@ -41,6 +45,9 @@ const useStyles = createStyles((theme) => ({
     color: theme.colors.purple[0],
     backgroundColor: theme.colors.purple[4],
     borderRadius: 50,
+    "&:hover": {
+      backgroundColor: theme.colors.purple[4],
+    },
   },
   "text-input": {
     width: "100%",
@@ -50,6 +57,20 @@ const useStyles = createStyles((theme) => ({
     border: "none",
     borderRadius: "10px",
     boxShadow: `3px 3px 5px ${theme.colors["cool-grey"][2]}`,
+  },
+  label: {
+    fontFamily: "soleil",
+    fontSize: "20px",
+    color: theme.colors.purple[4],
+  },
+  asterisk: {
+    display: "none",
+  },
+  "password-rules": {
+    translate: "0px -42px",
+    fontFamily: "soleil",
+    fontSize: "14px",
+    color: theme.colors["cool-grey"][3],
   },
 }));
 
@@ -103,33 +124,47 @@ const SignupForm = (): JSX.Element => {
           required
           label="Email"
           placeholder="your@email.com"
-          classNames={{ input: classes["text-input"] }}
+          classNames={{
+            input: classes["text-input"],
+            label: classes.label,
+            required: classes.asterisk,
+          }}
           {...form.getInputProps("email")}
         />
         <TextInput
           required
           label="Username"
-          placeholder="myusername"
-          classNames={{ input: classes["text-input"] }}
+          placeholder="my_username"
+          classNames={{
+            input: classes["text-input"],
+            label: classes.label,
+            required: classes.asterisk,
+          }}
           {...form.getInputProps("username")}
         />
         <PasswordInput
           required
           label="Password"
-          placeholder="password"
           classNames={{
             innerInput: classes["text-input"],
             input: classes["text-input"],
+            label: classes.label,
+            required: classes.asterisk,
           }}
           {...form.getInputProps("password")}
         />
+        <Text className={classes["password-rules"]}>
+          Must be at least 8 characters and include a mix of letters, numbers,
+          and symbols
+        </Text>
         <PasswordInput
           required
           label="Confirm Password"
-          placeholder="confirm password"
           classNames={{
             innerInput: classes["text-input"],
             input: classes["text-input"],
+            label: classes.label,
+            required: classes.asterisk,
           }}
           {...form.getInputProps("confirmPassword")}
         />
