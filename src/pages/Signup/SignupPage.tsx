@@ -1,25 +1,12 @@
 import React from "react";
-import { createStyles } from "@mantine/core";
+
 import SignupForm from "./SignupForm/SignupForm";
+import usePageStyles from "./SignupPage.styles";
 
 import "assets/fonts.css";
 
-const useStyles = createStyles((theme) => ({
-  container: {
-    display: "flex",
-    flexFlow: "column nowrap",
-    justifyContent: "center",
-    alignItems: "center",
-    fontSize: "36px",
-  },
-  heading: {
-    color: theme.colors["cool-grey"][7],
-    fontWeight: 500,
-  },
-}));
-
 const SignupPage = (): JSX.Element => {
-  const { classes } = useStyles();
+  const { classes } = usePageStyles();
 
   return (
     <div className={classes.container}>
