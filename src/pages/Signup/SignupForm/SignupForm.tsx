@@ -14,7 +14,6 @@ import { useForm } from "@mantine/form";
 import signupUser from "api/user";
 
 import useFormStyles from "./SignupForm.styles";
-import "assets/fonts.css";
 
 interface FormValues {
   email: string;

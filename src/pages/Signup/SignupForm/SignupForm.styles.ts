@@ -1,5 +1,4 @@
 import { createStyles } from "@mantine/core";
-import "assets/fonts.css";
 
 const useFormStyles = createStyles((theme) => ({
   "form-container": {
