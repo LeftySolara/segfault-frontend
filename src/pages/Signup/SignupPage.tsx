@@ -6,7 +6,6 @@ import "assets/fonts.css";
 
 const useStyles = createStyles((theme) => ({
   container: {
-    marginTop: "96px",
     display: "flex",
     flexFlow: "column nowrap",
     justifyContent: "center",

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 import {
   Box,
@@ -48,6 +49,11 @@ const useStyles = createStyles((theme) => ({
     "&:hover": {
       backgroundColor: theme.colors.purple[4],
     },
+  },
+  link: {
+    textDecoration: "none",
+    fontFamily: "soleil",
+    color: theme.colors.purple[4],
   },
   "text-input": {
     width: "100%",
@@ -169,7 +175,10 @@ const SignupForm = (): JSX.Element => {
           {...form.getInputProps("confirmPassword")}
         />
 
-        <Group position="right" mt="md">
+        <Group position="apart" mt="md">
+          <Link to="/login" className={classes.link}>
+            Log in Instead
+          </Link>
           <Button type="submit" className={classes.button}>
             Sign Up
           </Button>
