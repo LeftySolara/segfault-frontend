@@ -76,6 +76,7 @@ const SignupForm = (): JSX.Element => {
             input: classes["text-input"],
             label: classes.label,
             required: classes.asterisk,
+            error: classes.error,
           }}
           {...form.getInputProps("email")}
         />
@@ -87,6 +88,7 @@ const SignupForm = (): JSX.Element => {
             input: classes["text-input"],
             label: classes.label,
             required: classes.asterisk,
+            error: classes.error,
           }}
           {...form.getInputProps("username")}
         />
@@ -98,6 +100,7 @@ const SignupForm = (): JSX.Element => {
             input: classes["text-input"],
             label: classes.label,
             required: classes.asterisk,
+            error: classes.error,
           }}
           {...form.getInputProps("password")}
         />
@@ -113,6 +116,7 @@ const SignupForm = (): JSX.Element => {
             input: classes["text-input"],
             label: classes.label,
             required: classes.asterisk,
+            error: classes.error,
           }}
           {...form.getInputProps("confirmPassword")}
         />

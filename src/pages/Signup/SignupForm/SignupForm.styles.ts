@@ -55,6 +55,13 @@ const useFormStyles = createStyles((theme) => ({
     fontSize: "14px",
     color: theme.colors["cool-grey"][3],
   },
+  error: {
+    position: "absolute",
+    padding: "0px 0px 20px 0px",
+    translate: "0px -45px",
+    backgroundColor: "white",
+    zIndex: 2,
+  },
 }));
 
 export default useFormStyles;
