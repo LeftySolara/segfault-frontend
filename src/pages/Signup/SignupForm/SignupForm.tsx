@@ -23,7 +23,8 @@ interface FormValues {
 }
 
 const SignupForm = (): JSX.Element => {
-  const [errorMsg, setErrorMsg] = useState<string>("");
+  const [usernameInUse, setUsernameInUse] = useState<boolean>(false);
+  const [emailInUse, setEmailInUse] = useState<boolean>(false);
 
   const handleSubmit = async (values: FormValues) => {
     const response = await signupUser(
@@ -33,10 +34,20 @@ const SignupForm = (): JSX.Element => {
       values.confirmPassword,
     );
 
+    // TODO: Find a way to do this that doesn't rely on specific message content
     if (response && response.status !== 201) {
-      setErrorMsg(response.data.message);
-    } else {
-      setErrorMsg("");
+      if (
+        response.data.message.includes("Email") &&
+        response.data.message.includes("already in use")
+      ) {
+        setEmailInUse(true);
+      }
+      if (
+        response.data.message.includes("Username") &&
+        response.data.message.includes("already in use")
+      ) {
+        setUsernameInUse(true);
+      }
     }
   };
 
@@ -78,6 +89,7 @@ const SignupForm = (): JSX.Element => {
             required: classes.asterisk,
             error: classes.error,
           }}
+          error={emailInUse ? "Email address already in use" : undefined}
           {...form.getInputProps("email")}
         />
         <TextInput
@@ -90,6 +102,7 @@ const SignupForm = (): JSX.Element => {
             required: classes.asterisk,
             error: classes.error,
           }}
+          error={usernameInUse ? "Username already in use" : undefined}
           {...form.getInputProps("username")}
         />
         <PasswordInput
@@ -130,7 +143,6 @@ const SignupForm = (): JSX.Element => {
           </Button>
         </Group>
       </form>
-      {errorMsg && <p>{errorMsg}</p>}
     </Box>
   );
 };

@@ -8,6 +8,7 @@ const useFormStyles = createStyles((theme) => ({
     maxHeight: "768px",
     backgroundColor: "white",
     display: "flex",
+    flexFlow: "column nowrap",
     justifyContent: "center",
     alignItems: "center",
     boxShadow: `10px 10px 20px ${theme.colors["cool-grey"][3]}`,
