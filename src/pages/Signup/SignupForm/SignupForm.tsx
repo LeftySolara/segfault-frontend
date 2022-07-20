@@ -81,6 +81,7 @@ const SignupForm = (): JSX.Element => {
       >
         <TextInput
           required
+          type="email"
           label="Email"
           placeholder="your@email.com"
           classNames={{
@@ -88,6 +89,7 @@ const SignupForm = (): JSX.Element => {
             label: classes.label,
             required: classes.asterisk,
             error: classes.error,
+            invalid: classes["text-input"],
           }}
           error={emailInUse ? "Email address already in use" : undefined}
           {...form.getInputProps("email")}
@@ -101,6 +103,7 @@ const SignupForm = (): JSX.Element => {
             label: classes.label,
             required: classes.asterisk,
             error: classes.error,
+            invalid: classes["text-input"],
           }}
           error={usernameInUse ? "Username already in use" : undefined}
           {...form.getInputProps("username")}
@@ -114,6 +117,7 @@ const SignupForm = (): JSX.Element => {
             label: classes.label,
             required: classes.asterisk,
             error: classes.error,
+            invalid: classes["text-input"],
           }}
           {...form.getInputProps("password")}
         />
@@ -130,6 +134,7 @@ const SignupForm = (): JSX.Element => {
             label: classes.label,
             required: classes.asterisk,
             error: classes.error,
+            invalid: classes["text-input"],
           }}
           {...form.getInputProps("confirmPassword")}
         />
