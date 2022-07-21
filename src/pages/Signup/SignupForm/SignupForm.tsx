@@ -5,6 +5,7 @@ import {
   Box,
   Button,
   Group,
+  LoadingOverlay,
   PasswordInput,
   Text,
   TextInput,
@@ -23,16 +24,19 @@ interface FormValues {
 }
 
 const SignupForm = (): JSX.Element => {
+  const [loading, setLoading] = useState<boolean>(false);
   const [usernameInUse, setUsernameInUse] = useState<boolean>(false);
   const [emailInUse, setEmailInUse] = useState<boolean>(false);
 
   const handleSubmit = async (values: FormValues) => {
+    setLoading(true);
     const response = await signupUser(
       values.username,
       values.email,
       values.password,
       values.confirmPassword,
     );
+    setLoading(false);
 
     // TODO: Find a way to do this that doesn't rely on specific message content
     if (response && response.status !== 201) {
@@ -75,6 +79,7 @@ const SignupForm = (): JSX.Element => {
 
   return (
     <Box className={classes["form-container"]}>
+      <LoadingOverlay visible={loading} />
       <form
         className={classes.form}
         onSubmit={form.onSubmit((values) => handleSubmit(values))}
@@ -138,7 +143,6 @@ const SignupForm = (): JSX.Element => {
           }}
           {...form.getInputProps("confirmPassword")}
         />
-
         <Group position="apart" mt="md">
           <Link to="/login" className={classes.link}>
             Log in Instead
