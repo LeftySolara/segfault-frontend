@@ -90,6 +90,8 @@ const SignupForm = (): JSX.Element => {
       >
         <TextInput
           required
+          id="email-input"
+          name="email-input"
           type="email"
           label="Email"
           placeholder="your@email.com"
@@ -105,6 +107,8 @@ const SignupForm = (): JSX.Element => {
         />
         <TextInput
           required
+          id="username-input"
+          name="username-input"
           label="Username"
           placeholder="my_username"
           classNames={{
@@ -119,6 +123,8 @@ const SignupForm = (): JSX.Element => {
         />
         <PasswordInput
           required
+          id="password-input"
+          name="password-input"
           label="Password"
           classNames={{
             innerInput: classes["text-input"],
@@ -135,6 +141,8 @@ const SignupForm = (): JSX.Element => {
           and symbols
         </Text>
         <PasswordInput
+          id="confirm-password-input"
+          name="confirm-password-input"
           required
           label="Confirm Password"
           classNames={{
