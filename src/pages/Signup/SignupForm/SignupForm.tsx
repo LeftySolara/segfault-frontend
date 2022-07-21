@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import {
   Box,
@@ -28,6 +28,8 @@ const SignupForm = (): JSX.Element => {
   const [usernameInUse, setUsernameInUse] = useState<boolean>(false);
   const [emailInUse, setEmailInUse] = useState<boolean>(false);
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (values: FormValues) => {
     setLoading(true);
     const response = await signupUser(
@@ -52,6 +54,8 @@ const SignupForm = (): JSX.Element => {
       ) {
         setUsernameInUse(true);
       }
+    } else if (response && response.status === 201) {
+      navigate("/", { replace: false });
     }
   };
 
