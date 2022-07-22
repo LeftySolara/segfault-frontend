@@ -1,17 +1,31 @@
 import React from "react";
-import { fireEvent, render, screen, waitFor } from "utils/test-utils";
+import { fireEvent, render, screen } from "utils/test-utils";
 
 import SignupForm from "./SignupForm";
 
 describe("SignupForm", () => {
-  it("should render form elements", () => {
+  let emailInput: HTMLElement;
+  let usernameInput: HTMLElement;
+  let passwordInput: HTMLElement;
+  let confirmPasswordInput: HTMLElement;
+  let submitButton: HTMLElement;
+
+  beforeEach(() => {
     render(<SignupForm />);
 
+    emailInput = screen.getByLabelText(/Email/);
+    usernameInput = screen.getByLabelText(/Username/);
+    passwordInput = screen.getByLabelText(/^Password/);
+    confirmPasswordInput = screen.getByLabelText(/^Confirm Password/);
+    submitButton = screen.getByText("Sign Up");
+  });
+
+  it("should render form elements", () => {
     // Form inputs
-    expect(screen.getByLabelText(/Email/)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Username/)).toBeInTheDocument();
-    expect(screen.getByLabelText(/^Password/)).toBeInTheDocument();
-    expect(screen.getByLabelText(/^Confirm Password/)).toBeInTheDocument();
+    expect(emailInput).toBeInTheDocument();
+    expect(usernameInput).toBeInTheDocument();
+    expect(passwordInput).toBeInTheDocument();
+    expect(confirmPasswordInput).toBeInTheDocument();
 
     // Password rules
     expect(
@@ -26,7 +40,7 @@ describe("SignupForm", () => {
     ).toBeInTheDocument();
 
     // Submit button
-    expect(screen.getByRole("button", { name: "Sign Up" })).toBeInTheDocument();
+    expect(submitButton).toBeInTheDocument();
   });
 
   describe("on submit", () => {
@@ -35,13 +49,6 @@ describe("SignupForm", () => {
     });
 
     it("should display an error if the entered password does not meet minimum requirements", () => {
-      render(<SignupForm />);
-
-      const emailInput = screen.getByLabelText(/Email/);
-      const usernameInput = screen.getByLabelText(/Username/);
-      const passwordInput = screen.getByLabelText(/^Password/);
-      const confirmPasswordInput = screen.getByLabelText(/^Confirm Password/);
-      const submitButton = screen.getByText("Sign Up");
       const errorMessage = /Password does not meet minimum requirements/i;
 
       fireEvent.change(emailInput, { target: { value: "hello@example.com" } });
@@ -55,13 +62,6 @@ describe("SignupForm", () => {
     });
 
     it("Should display an error if the passwords do not match", () => {
-      render(<SignupForm />);
-
-      const emailInput = screen.getByLabelText(/Email/);
-      const usernameInput = screen.getByLabelText(/Username/);
-      const passwordInput = screen.getByLabelText(/^Password/);
-      const confirmPasswordInput = screen.getByLabelText(/^Confirm Password/);
-      const submitButton = screen.getByText("Sign Up");
       const errorMessage = /Passwords must match/i;
 
       fireEvent.change(emailInput, { target: { value: "hello@example.com" } });
