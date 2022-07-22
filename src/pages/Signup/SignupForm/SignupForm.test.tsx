@@ -1,7 +1,12 @@
 import React from "react";
-import { fireEvent, render, screen } from "utils/test-utils";
+import { act } from "react-dom/test-utils";
 
+import { fireEvent, render, screen } from "utils/test-utils";
+import axiosClient from "api/axiosClient";
 import SignupForm from "./SignupForm";
+
+jest.mock("api/axiosClient");
+const mockedAxios = axiosClient as jest.Mocked<typeof axiosClient>;
 
 describe("SignupForm", () => {
   let emailInput: HTMLElement;
@@ -74,8 +79,29 @@ describe("SignupForm", () => {
       expect(screen.getByText(errorMessage)).toBeInTheDocument();
     });
 
-    it("should display an error message if the email address is already in use", () => {
-      // Implement me!
+    it("should display an error message if the email address is already in use", async () => {
+      const mockResponse = {
+        status: 422,
+        data: { message: "Email already in use" },
+      };
+
+      mockedAxios.post.mockResolvedValue(mockResponse);
+
+      await act(async () => {
+        fireEvent.change(emailInput, {
+          target: { value: "hello@example.com" },
+        });
+        fireEvent.change(usernameInput, { target: { value: "example" } });
+        fireEvent.change(passwordInput, { target: { value: "hello123!" } });
+        fireEvent.change(confirmPasswordInput, {
+          target: { value: "hello123!" },
+        });
+        fireEvent.click(submitButton);
+      });
+
+      expect(
+        screen.getByText("Email address already in use"),
+      ).toBeInTheDocument();
     });
 
     it("should display an error message if the username is already in use", () => {
