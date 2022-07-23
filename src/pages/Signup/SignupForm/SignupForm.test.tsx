@@ -104,8 +104,27 @@ describe("SignupForm", () => {
       ).toBeInTheDocument();
     });
 
-    it("should display an error message if the username is already in use", () => {
-      // Implement me!
+    it("should display an error message if the username is already in use", async () => {
+      const mockResponse = {
+        status: 422,
+        data: { message: "Username already in use" },
+      };
+
+      mockedAxios.post.mockResolvedValue(mockResponse);
+
+      await act(async () => {
+        fireEvent.change(emailInput, {
+          target: { value: "hello@example.com" },
+        });
+        fireEvent.change(usernameInput, { target: { value: "example" } });
+        fireEvent.change(passwordInput, { target: { value: "hello123!" } });
+        fireEvent.change(confirmPasswordInput, {
+          target: { value: "hello123!" },
+        });
+        fireEvent.click(submitButton);
+      });
+
+      expect(screen.getByText("Username already in use")).toBeInTheDocument();
     });
   });
 });
