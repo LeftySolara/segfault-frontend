@@ -1,18 +1,14 @@
 import React from "react";
 import { act } from "react-dom/test-utils";
 
-import { fireEvent, render, screen } from "utils/test-utils";
-import axiosClient from "api/axiosClient";
+import {
+  fireEvent,
+  mockedAxios,
+  mockedUseNavigate,
+  render,
+  screen,
+} from "utils/test-utils";
 import SignupForm from "./SignupForm";
-
-jest.mock("api/axiosClient");
-const mockedAxios = axiosClient as jest.Mocked<typeof axiosClient>;
-
-const mockedUseNavigate = jest.fn();
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
-  useNavigate: () => mockedUseNavigate,
-}));
 
 describe("SignupForm", () => {
   let emailInput: HTMLElement;

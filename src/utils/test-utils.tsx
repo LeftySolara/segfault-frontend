@@ -3,6 +3,16 @@ import { render } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { MantineProvider } from "@mantine/core";
 import theme from "assets/theme";
+import axiosClient from "api/axiosClient";
+
+jest.mock("api/axiosClient");
+const mockedAxios = axiosClient as jest.Mocked<typeof axiosClient>;
+
+const mockedUseNavigate = jest.fn();
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useNavigate: () => mockedUseNavigate,
+}));
 
 const Providers: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <MemoryRouter>
@@ -18,4 +28,4 @@ const renderWithProviders = (ui: ReactElement, { route = "/" } = {}) => {
 };
 
 export * from "@testing-library/react";
-export { renderWithProviders as render };
+export { renderWithProviders as render, mockedAxios, mockedUseNavigate };
