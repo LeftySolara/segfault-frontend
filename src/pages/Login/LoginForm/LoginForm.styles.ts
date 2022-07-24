@@ -55,9 +55,8 @@ const useFormStyles = createStyles((theme) => ({
   error: {
     position: "absolute",
     padding: "0px 0px 20px 0px",
-    translate: "0px -45px",
+    translate: "0px 210px",
     color: theme.colors.red[4],
-    backgroundColor: "white",
     zIndex: 2,
   },
 }));

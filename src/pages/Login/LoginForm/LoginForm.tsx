@@ -7,6 +7,7 @@ import {
   Group,
   LoadingOverlay,
   PasswordInput,
+  Text,
   TextInput,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
@@ -22,6 +23,7 @@ interface FormValues {
 
 const LoginForm = (): JSX.Element => {
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
 
   const navigate = useNavigate();
 
@@ -32,6 +34,10 @@ const LoginForm = (): JSX.Element => {
 
     if (response && response.status === 200) {
       navigate("/", { replace: false });
+    } else if (response && response.data) {
+      setError(response.data.message);
+    } else {
+      setError("Internal server error");
     }
   };
 
@@ -91,6 +97,7 @@ const LoginForm = (): JSX.Element => {
           </Button>
         </Group>
       </form>
+      {error && <Text className={classes.error}>{error}</Text>}
     </Box>
   );
 };
