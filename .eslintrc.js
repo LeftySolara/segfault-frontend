@@ -26,6 +26,7 @@ module.exports = {
   plugins: ["react", "prettier", "jest"],
   rules: {
     "prettier/prettier": ["error", { singleQuote: false }],
+    "react/jsx-props-no-spreading": "off",
     "react/jsx-filename-extension": [
       1,
       { extensions: [".js", ".jsx", "tsx", ".ts"] },

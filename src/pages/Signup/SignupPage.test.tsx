@@ -1,11 +1,11 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "utils/test-utils";
 
 import SignupPage from "./SignupPage";
 
-describe("LoginPage", () => {
+describe("SignupPage", () => {
   it("renders SignupPage component", () => {
     render(<SignupPage />);
-    expect(screen.getByText(/Sign Up/i)).toBeInTheDocument();
+    expect(screen.getByText(/Welcome Aboard/i)).toBeInTheDocument();
   });
 });
