@@ -74,7 +74,7 @@ describe("SignupForm", () => {
       expect(mockedUseNavigate).toHaveBeenCalledTimes(1);
     });
 
-    it("should display an error if the entered password does not meet minimum requirements", () => {
+    it("should display an error message if the entered password does not meet minimum requirements", () => {
       const errorMessage = /Password does not meet minimum requirements/i;
 
       fireEvent.change(emailInput, { target: { value: "hello@example.com" } });
@@ -87,7 +87,7 @@ describe("SignupForm", () => {
       expect(screen.getByText(errorMessage)).toBeInTheDocument();
     });
 
-    it("Should display an error if the passwords do not match", () => {
+    it("Should display an error message if the passwords do not match", () => {
       const errorMessage = /Passwords must match/i;
 
       fireEvent.change(emailInput, { target: { value: "hello@example.com" } });
