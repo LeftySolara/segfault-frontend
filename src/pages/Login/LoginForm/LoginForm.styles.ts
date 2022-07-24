@@ -4,7 +4,7 @@ const useFormStyles = createStyles((theme) => ({
   "form-container": {
     position: "relative",
     width: "640px",
-    height: "768px",
+    height: "480px",
     maxWidth: "640px",
     maxHeight: "768px",
     backgroundColor: "white",
