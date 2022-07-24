@@ -8,6 +8,12 @@ import SignupForm from "./SignupForm";
 jest.mock("api/axiosClient");
 const mockedAxios = axiosClient as jest.Mocked<typeof axiosClient>;
 
+const mockedUseNavigate = jest.fn();
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useNavigate: () => mockedUseNavigate,
+}));
+
 describe("SignupForm", () => {
   let emailInput: HTMLElement;
   let usernameInput: HTMLElement;
@@ -49,8 +55,23 @@ describe("SignupForm", () => {
   });
 
   describe("on submit", () => {
-    it("should redirect to the home page after successful submission", () => {
-      // Implement me!
+    it("should redirect to the home page after successful submission", async () => {
+      const mockResponse = { status: 201 };
+      mockedAxios.post.mockResolvedValue(mockResponse);
+
+      await act(async () => {
+        fireEvent.change(emailInput, {
+          target: { value: "hello@example.com" },
+        });
+        fireEvent.change(usernameInput, { target: { value: "example" } });
+        fireEvent.change(passwordInput, { target: { value: "hello123!" } });
+        fireEvent.change(confirmPasswordInput, {
+          target: { value: "hello123!" },
+        });
+        fireEvent.click(submitButton);
+      });
+
+      expect(mockedUseNavigate).toHaveBeenCalledTimes(1);
     });
 
     it("should display an error if the entered password does not meet minimum requirements", () => {
