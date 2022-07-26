@@ -12,7 +12,7 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
-import signupUser from "api/user";
+import { signupUser } from "api/user";
 
 import useFormStyles from "./SignupForm.styles";
 

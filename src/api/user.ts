@@ -2,7 +2,28 @@ import { AxiosError } from "axios";
 import axiosClient from "./axiosClient";
 
 /**
- * Sends an HTTP request to create a new user account
+ * Send an HTTP request to log in an existing user
+ *
+ * @param {string} email - The user's email address
+ * @param {string} password - The user's password
+ *
+ * @returns A promise containing response data
+ */
+const loginUser = async (email: string, password: string) => {
+  let res;
+  try {
+    res = await axiosClient.post("/auth/login", { email, password });
+  } catch (err: unknown) {
+    if (err instanceof AxiosError) {
+      res = err.response;
+    }
+  }
+
+  return res;
+};
+
+/**
+ * Send an HTTP request to create a new user account
  *
  * @param {string} username - The new user's username
  * @param {string} email - The new user's email address
@@ -34,4 +55,4 @@ const signupUser = async (
   return res;
 };
 
-export default signupUser;
+export { loginUser, signupUser };
