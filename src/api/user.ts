@@ -12,7 +12,11 @@ import axiosClient from "./axiosClient";
 const loginUser = async (email: string, password: string) => {
   let res;
   try {
-    res = await axiosClient.post("/auth/login", { email, password });
+    res = await axiosClient.post(
+      "/auth/login",
+      { email, password },
+      { withCredentials: true },
+    );
   } catch (err: unknown) {
     if (err instanceof AxiosError) {
       res = err.response;
