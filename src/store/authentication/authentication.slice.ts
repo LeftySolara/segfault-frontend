@@ -16,10 +16,13 @@ const authSlice = createSlice({
     ) => {
       state.user = user;
     },
+    clearUser: (state: AuthState) => {
+      state.user = null;
+    },
   },
 });
 
-export const { setCredentials } = authSlice.actions;
+export const { setCredentials, clearUser } = authSlice.actions;
 
 export const selectCurrentUser = (state: RootState) => state.auth.user;
 

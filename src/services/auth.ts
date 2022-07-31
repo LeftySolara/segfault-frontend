@@ -21,6 +21,13 @@ const authApi = api.injectEndpoints({
         credentials: "include",
       }),
     }),
+    logout: builder.mutation<undefined, void>({
+      query: () => ({
+        url: "/auth/logout",
+        method: "GET",
+        credentials: "include",
+      }),
+    }),
     checkIsAuthenticated: builder.query<User | undefined, void>({
       query: () => ({
         url: "/auth/user",
@@ -33,4 +40,8 @@ const authApi = api.injectEndpoints({
 });
 
 // eslint-disable-next-line import/prefer-default-export
-export const { useLoginMutation, useCheckIsAuthenticatedQuery } = authApi;
+export const {
+  useLoginMutation,
+  useLogoutMutation,
+  useCheckIsAuthenticatedQuery,
+} = authApi;
