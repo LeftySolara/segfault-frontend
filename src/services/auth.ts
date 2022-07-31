@@ -21,9 +21,16 @@ const authApi = api.injectEndpoints({
         credentials: "include",
       }),
     }),
+    checkIsAuthenticated: builder.query<User | undefined, void>({
+      query: () => ({
+        url: "/auth/user",
+        method: "GET",
+        credentials: "include",
+      }),
+    }),
   }),
   overrideExisting: false,
 });
 
 // eslint-disable-next-line import/prefer-default-export
-export const { useLoginMutation } = authApi;
+export const { useLoginMutation, useCheckIsAuthenticatedQuery } = authApi;
