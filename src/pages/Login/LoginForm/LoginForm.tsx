@@ -12,6 +12,9 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
+import { useAppDispatch } from "hooks/reduxHooks";
+import { login } from "store/authentication/authentication.slice";
+
 import { loginUser } from "api/user";
 
 import useFormStyles from "./LoginForm.styles";
@@ -26,9 +29,11 @@ const LoginForm = (): JSX.Element => {
   const [error, setError] = useState<string>("");
 
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const handleSubmit = async (values: FormValues) => {
     setLoading(true);
+    dispatch(login());
     const response = await loginUser(values.email, values.password);
     setLoading(false);
 
