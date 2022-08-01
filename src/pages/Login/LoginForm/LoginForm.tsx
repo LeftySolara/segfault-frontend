@@ -12,7 +12,10 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
-import { loginUser } from "api/user";
+import { useAppDispatch } from "hooks/reduxHooks";
+import { ApiError } from "services/api";
+import { useLoginMutation } from "services/auth";
+import { setCredentials } from "store/auth/auth.slice";
 
 import useFormStyles from "./LoginForm.styles";
 
@@ -22,22 +25,21 @@ interface FormValues {
 }
 
 const LoginForm = (): JSX.Element => {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
+  const [error, setError] = useState<ApiError>();
 
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = async (values: FormValues) => {
-    setLoading(true);
-    const response = await loginUser(values.email, values.password);
-    setLoading(false);
+  const [login, { isLoading }] = useLoginMutation();
 
-    if (response && response.status === 200) {
+  const handleSubmit = async (formValues: FormValues) => {
+    let user;
+    try {
+      user = await login(formValues).unwrap();
+      dispatch(setCredentials({ user }));
       navigate("/", { replace: false });
-    } else if (response && response.data) {
-      setError(response.data.message);
-    } else {
-      setError("Internal server error");
+    } catch (err: unknown) {
+      setError(err as ApiError);
     }
   };
 
@@ -52,7 +54,7 @@ const LoginForm = (): JSX.Element => {
 
   return (
     <Box className={classes["form-container"]}>
-      <LoadingOverlay visible={loading} />
+      <LoadingOverlay visible={isLoading} />
       <form
         className={classes.form}
         onSubmit={form.onSubmit((values) => handleSubmit(values))}
@@ -97,7 +99,11 @@ const LoginForm = (): JSX.Element => {
           </Button>
         </Group>
       </form>
-      {error && <Text className={classes.error}>{error}</Text>}
+      {error && (
+        <Text className={classes.error}>
+          {error.data ? error.data.message : "An unknown error occurred."}
+        </Text>
+      )}
     </Box>
   );
 };
