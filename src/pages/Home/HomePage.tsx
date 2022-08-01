@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch } from "hooks/reduxHooks";
 import { useLogoutMutation } from "services/auth";
-import { clearUser } from "store/authentication/authentication.slice";
+import { clearUser } from "store/auth/auth.slice";
 
 const HomePage = (): JSX.Element => {
   const dispatch = useAppDispatch();

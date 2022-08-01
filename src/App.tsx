@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 import { useCheckIsAuthenticatedQuery } from "services/auth";
 import { useAppDispatch } from "hooks/reduxHooks";
-import { setCredentials } from "store/authentication/authentication.slice";
+import { setCredentials } from "store/auth/auth.slice";
 
 import HomePage from "pages/Home/HomePage";
 import LoginPage from "pages/Login/LoginPage";

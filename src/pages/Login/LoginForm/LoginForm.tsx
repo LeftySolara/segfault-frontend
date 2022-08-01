@@ -15,7 +15,7 @@ import { useForm } from "@mantine/form";
 import { useAppDispatch } from "hooks/reduxHooks";
 import { ApiError } from "services/api";
 import { useLoginMutation } from "services/auth";
-import { setCredentials } from "store/authentication/authentication.slice";
+import { setCredentials } from "store/auth/auth.slice";
 
 import useFormStyles from "./LoginForm.styles";
 
