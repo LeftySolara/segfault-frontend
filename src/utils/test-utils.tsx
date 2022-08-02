@@ -2,15 +2,14 @@ import React, { PropsWithChildren } from "react";
 import { render, RenderOptions } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { configureStore, PreloadedState } from "@reduxjs/toolkit";
+import { PreloadedState } from "@reduxjs/toolkit";
 
 import { MantineProvider } from "@mantine/core";
 import theme from "assets/theme";
 
 import axiosClient from "api/axiosClient";
 
-import type { AppStore, RootState } from "../store/store";
-import rootReducer from "../store/rootReducer";
+import { AppStore, RootState, setupStore } from "../store/store";
 
 // This type interface extends the default options for render from RTL, as well
 // as allows the user to specify other things such as initialState, store.
@@ -25,7 +24,7 @@ function renderWithProviders(
   {
     preloadedState = {},
     // Automatically create a store instance if no store was passed in.
-    store = configureStore({ reducer: rootReducer, preloadedState }),
+    store = setupStore(preloadedState),
     ...renderOptions
   }: ExtendedRenderOptions = {},
 ) {
