@@ -52,9 +52,6 @@ jest.mock("react-router-dom", () => ({
   useNavigate: () => mockedUseNavigate,
 }));
 
-jest.mock("api/axiosClient");
-const mockedAxios = axiosClient as jest.Mocked<typeof axiosClient>;
-
 export * from "@testing-library/react";
 
-export { renderWithProviders as render, mockedAxios };
+export { renderWithProviders as render };

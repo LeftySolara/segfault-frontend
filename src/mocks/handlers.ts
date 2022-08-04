@@ -66,7 +66,41 @@ const handleLogin = async (
   return response;
 };
 
+const handleSignup = async (
+  req: RestRequest<never, PathParams<string>>,
+  res: ResponseComposition<DefaultBodyType>,
+  ctx: RestContext,
+) => {
+  const body = await req.json();
+  let response;
+
+  if (body.email === EMAIL_ADDRESS) {
+    response = res(
+      ctx.status(422),
+      ctx.json({ message: "Email already in use" }),
+    );
+  } else if (body.username === USERNAME) {
+    response = res(
+      ctx.status(422),
+      ctx.json({ message: "Username already in use" }),
+    );
+  } else {
+    response = res(
+      ctx.status(201),
+      ctx.json({
+        username: USERNAME,
+        email: EMAIL_ADDRESS,
+        id: USER_ID,
+        token: "12345678",
+      }),
+    );
+  }
+
+  return response;
+};
+
 export const handlers = [
   rest.get(`${API_ENDPOINT}/auth/user`, handleAuthCheck),
   rest.post(`${API_ENDPOINT}/auth/login`, handleLogin),
+  rest.post(`${API_ENDPOINT}/users`, handleSignup),
 ];

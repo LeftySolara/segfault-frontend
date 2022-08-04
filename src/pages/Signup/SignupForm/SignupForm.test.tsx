@@ -3,10 +3,10 @@ import { act } from "react-dom/test-utils";
 
 import {
   fireEvent,
-  mockedAxios,
   mockedUseNavigate,
   render,
   screen,
+  waitFor,
 } from "utils/test-utils";
 import SignupForm from "./SignupForm";
 
@@ -52,12 +52,9 @@ describe("SignupForm", () => {
 
   describe("on submit", () => {
     it("should redirect to the home page after successful submission", async () => {
-      const mockResponse = { status: 201 };
-      mockedAxios.post.mockResolvedValue(mockResponse);
-
       await act(async () => {
         fireEvent.change(emailInput, {
-          target: { value: "hello@example.com" },
+          target: { value: "hello1@example.com" },
         });
         fireEvent.change(usernameInput, { target: { value: "example" } });
         fireEvent.change(passwordInput, { target: { value: "hello123!" } });
@@ -67,7 +64,7 @@ describe("SignupForm", () => {
         fireEvent.click(submitButton);
       });
 
-      expect(mockedUseNavigate).toHaveBeenCalledTimes(1);
+      await waitFor(() => expect(mockedUseNavigate).toHaveBeenCalledTimes(1));
     });
 
     it("should display an error message if the entered password does not meet minimum requirements", () => {
@@ -97,13 +94,6 @@ describe("SignupForm", () => {
     });
 
     it("should display an error message if the email address is already in use", async () => {
-      const mockResponse = {
-        status: 422,
-        data: { message: "Email already in use" },
-      };
-
-      mockedAxios.post.mockResolvedValue(mockResponse);
-
       await act(async () => {
         fireEvent.change(emailInput, {
           target: { value: "hello@example.com" },
@@ -116,24 +106,19 @@ describe("SignupForm", () => {
         fireEvent.click(submitButton);
       });
 
-      expect(
-        screen.getByText("Email address already in use"),
-      ).toBeInTheDocument();
+      waitFor(() =>
+        expect(
+          screen.getByText("Email address already in use"),
+        ).toBeInTheDocument(),
+      );
     });
 
     it("should display an error message if the username is already in use", async () => {
-      const mockResponse = {
-        status: 422,
-        data: { message: "Username already in use" },
-      };
-
-      mockedAxios.post.mockResolvedValue(mockResponse);
-
       await act(async () => {
         fireEvent.change(emailInput, {
           target: { value: "hello@example.com" },
         });
-        fireEvent.change(usernameInput, { target: { value: "example" } });
+        fireEvent.change(usernameInput, { target: { value: "hello" } });
         fireEvent.change(passwordInput, { target: { value: "hello123!" } });
         fireEvent.change(confirmPasswordInput, {
           target: { value: "hello123!" },
@@ -141,7 +126,9 @@ describe("SignupForm", () => {
         fireEvent.click(submitButton);
       });
 
-      expect(screen.getByText("Username already in use")).toBeInTheDocument();
+      waitFor(() =>
+        expect(screen.getByText("Username already in use")).toBeInTheDocument(),
+      );
     });
   });
 });
