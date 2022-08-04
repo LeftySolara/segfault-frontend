@@ -1,14 +1,9 @@
 import React from "react";
-import { MemoryRouter } from "react-router-dom";
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "utils/test-utils";
 import App from "./App";
 
 test("renders home page", () => {
-  render(
-    <MemoryRouter>
-      <App />
-    </MemoryRouter>,
-  );
+  render(<App />);
   const textElement = screen.getByText(/Home/i);
   expect(textElement).toBeInTheDocument();
 });

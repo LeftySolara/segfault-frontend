@@ -3,11 +3,12 @@ import { act } from "react-dom/test-utils";
 
 import {
   fireEvent,
-  mockedAxios,
   mockedUseNavigate,
   render,
   screen,
+  waitFor,
 } from "utils/test-utils";
+
 import LoginForm from "./LoginForm";
 
 describe("LoginForm", () => {
@@ -34,10 +35,7 @@ describe("LoginForm", () => {
   });
 
   describe("on submit", () => {
-    it("should redirect to the home page after successfull submission", async () => {
-      const mockResponse = { status: 200 };
-      mockedAxios.post.mockResolvedValue(mockResponse);
-
+    it("should redirect to the home page after successful submission", async () => {
       await act(async () => {
         fireEvent.change(emailInput, {
           target: { value: "hello@example.com" },
@@ -48,18 +46,12 @@ describe("LoginForm", () => {
         fireEvent.click(submitButton);
       });
 
-      expect(mockedUseNavigate).toHaveBeenCalledTimes(1);
+      await waitFor(() => expect(mockedUseNavigate).toHaveBeenCalledTimes(1));
     });
 
     it("should display an error message if the entered credentials are invalid", async () => {
       const errorMessage = /Invalid credentials/i;
 
-      const mockResponse = {
-        status: 401,
-        data: { message: "Invalid credentials" },
-      };
-      mockedAxios.post.mockResolvedValue(mockResponse);
-
       expect(screen.queryByText(errorMessage)).not.toBeInTheDocument();
 
       await act(async () => {
@@ -72,15 +64,14 @@ describe("LoginForm", () => {
         fireEvent.click(submitButton);
       });
 
-      expect(screen.getByText(errorMessage)).toBeInTheDocument();
+      await waitFor(() =>
+        expect(screen.getByText(errorMessage)).toBeInTheDocument(),
+      );
     });
 
     it("should display an error message if the backend cannot be reached", async () => {
       const errorMessage = /Internal server error/i;
 
-      const mockResponse = null;
-      mockedAxios.post.mockResolvedValue(mockResponse);
-
       expect(screen.queryByText(errorMessage)).not.toBeInTheDocument();
 
       await act(async () => {
@@ -88,12 +79,14 @@ describe("LoginForm", () => {
           target: { value: "hello@example.com" },
         });
         fireEvent.change(passwordInput, {
-          target: { value: "wrongpassword" },
+          target: { value: "blank" },
         });
         fireEvent.click(submitButton);
       });
 
-      expect(screen.getByText(errorMessage)).toBeInTheDocument();
+      await waitFor(() =>
+        expect(screen.getByText(errorMessage)).toBeInTheDocument(),
+      );
     });
   });
 });

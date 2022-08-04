@@ -1,16 +1,11 @@
 import React from "react";
-import { MemoryRouter } from "react-router-dom";
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "utils/test-utils";
 
 import HomePage from "./HomePage";
 
 describe("HomePage", () => {
   it("renders HomePage component", () => {
-    render(
-      <MemoryRouter>
-        <HomePage />
-      </MemoryRouter>,
-    );
+    render(<HomePage />);
     expect(screen.getByText(/Home/i)).toBeInTheDocument();
   });
 });

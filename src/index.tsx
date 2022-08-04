@@ -4,10 +4,12 @@ import { BrowserRouter } from "react-router-dom";
 
 import { Provider } from "react-redux";
 import { MantineProvider } from "@mantine/core";
+import { setupStore } from "store/store";
 
-import store from "store/store";
 import theme from "./assets/theme";
 import App from "./App";
+
+const store = setupStore();
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
