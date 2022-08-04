@@ -7,8 +7,6 @@ import { PreloadedState } from "@reduxjs/toolkit";
 import { MantineProvider } from "@mantine/core";
 import theme from "assets/theme";
 
-import axiosClient from "api/axiosClient";
-
 import { AppStore, RootState, setupStore } from "../store/store";
 
 // This type interface extends the default options for render from RTL, as well
