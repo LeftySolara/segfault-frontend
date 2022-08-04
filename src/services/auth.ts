@@ -19,6 +19,7 @@ const authApi = api.injectEndpoints({
         method: "POST",
         body: credentials,
         credentials: "include",
+        headers: { "Content-Type": "application/json" },
       }),
     }),
     logout: builder.mutation<undefined, void>({
