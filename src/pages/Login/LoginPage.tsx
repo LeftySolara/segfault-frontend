@@ -21,7 +21,7 @@ const LoginPage = (): JSX.Element => {
 
   return (
     <div className={classes.container}>
-      <h1 className={classes.heading}>Welcome Back</h1>
+      <h1 className={classes.heading}>Log in to your account</h1>
       <LoginForm />
     </div>
   );
