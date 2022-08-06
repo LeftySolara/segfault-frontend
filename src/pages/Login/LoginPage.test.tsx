@@ -6,6 +6,6 @@ import LoginPage from "./LoginPage";
 describe("LoginPage", () => {
   it("renders LoginPage component", () => {
     render(<LoginPage />);
-    expect(screen.getByText(/Welcome Back/i)).toBeInTheDocument();
+    expect(screen.getByText(/Log in to your account/i)).toBeInTheDocument();
   });
 });
