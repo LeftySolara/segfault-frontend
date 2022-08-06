@@ -21,7 +21,7 @@ const SignupPage = (): JSX.Element => {
 
   return (
     <div className={classes.container}>
-      <h1 className={classes.heading}>Welcome Aboard</h1>
+      <h1 className={classes.heading}>Create a new account</h1>
       <SignupForm />
     </div>
   );

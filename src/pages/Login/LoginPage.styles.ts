@@ -11,6 +11,7 @@ const usePageStyles = createStyles((theme) => ({
   heading: {
     color: theme.colors["cool-grey"][7],
     fontWeight: 500,
+    fontSize: "48px",
   },
 }));
 
