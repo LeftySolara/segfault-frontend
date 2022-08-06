@@ -81,7 +81,6 @@ const LoginForm = (): JSX.Element => {
           name="password-input"
           label="Password"
           classNames={{
-            innerInput: classes["text-input"],
             input: classes["text-input"],
             label: classes.label,
             required: classes.asterisk,

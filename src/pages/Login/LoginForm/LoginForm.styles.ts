@@ -12,8 +12,8 @@ const useFormStyles = createStyles((theme) => ({
     flexFlow: "column nowrap",
     justifyContent: "center",
     alignItems: "center",
-    boxShadow: `10px 10px 20px ${theme.colors["cool-grey"][3]}`,
-    borderRadius: "20px",
+    boxShadow: `0px 5px 0px ${theme.colors["cool-grey"][3]}`,
+    borderRadius: "0px",
   },
   form: {
     width: "396px",
@@ -24,7 +24,7 @@ const useFormStyles = createStyles((theme) => ({
     height: "55px",
     color: theme.colors.purple[0],
     backgroundColor: theme.colors.purple[4],
-    borderRadius: 50,
+    borderRadius: 0,
     "&:hover": {
       backgroundColor: theme.colors.purple[4],
     },
@@ -40,9 +40,8 @@ const useFormStyles = createStyles((theme) => ({
     marginBottom: "48px",
     color: theme.colors["cool-grey"][6],
     backgroundColor: theme.colors["cool-grey"][0],
-    border: "none",
-    borderRadius: "10px",
-    boxShadow: `3px 3px 5px ${theme.colors["cool-grey"][2]}`,
+    border: `2px solid ${theme.colors["cool-grey"][2]}`,
+    borderRadius: "0px",
   },
   label: {
     fontFamily: "soleil",
