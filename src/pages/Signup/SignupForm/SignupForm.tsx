@@ -127,7 +127,6 @@ const SignupForm = (): JSX.Element => {
           name="password-input"
           label="Password"
           classNames={{
-            innerInput: classes["text-input"],
             input: classes["text-input"],
             label: classes.label,
             required: classes.asterisk,
@@ -146,7 +145,6 @@ const SignupForm = (): JSX.Element => {
           required
           label="Confirm Password"
           classNames={{
-            innerInput: classes["text-input"],
             input: classes["text-input"],
             label: classes.label,
             required: classes.asterisk,
