@@ -1,11 +1,10 @@
 import React from "react";
 import { render, screen } from "utils/test-utils";
+import PageHeader from "./PageHeader";
 
-import Navbar from "./Navbar";
-
-describe("Navbar", () => {
+describe("PageHeader", () => {
   beforeEach(() => {
-    render(<Navbar />);
+    render(<PageHeader />);
   });
 
   describe("on render", () => {
