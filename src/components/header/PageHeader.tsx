@@ -1,25 +1,26 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Group, Header, Text } from "@mantine/core";
+import { Header, Text } from "@mantine/core";
+
+import { selectCurrentUser } from "store/auth/auth.slice";
+
+import LogoutButton from "./Buttons/LogoutButton";
+import AuthLinkGroup from "./Links/AuthLinkGroup";
 
 import useHeaderStyles from "./PageHeader.styles";
 
 const PageHeader = () => {
   const { classes } = useHeaderStyles();
 
+  const currentUser = useSelector(selectCurrentUser);
+
   return (
     <Header height={102} p="xs" className={classes.header}>
       <Text component={Link} to="/" className={classes.title}>
         Segfault
       </Text>
-      <Group noWrap className={classes["link-group"]}>
-        <Text component={Link} to="/signup" className={classes.link}>
-          Sign Up
-        </Text>
-        <Text component={Link} to="/login" className={classes.link}>
-          Log In
-        </Text>
-      </Group>
+      {currentUser ? <LogoutButton /> : <AuthLinkGroup />}
     </Header>
   );
 };
