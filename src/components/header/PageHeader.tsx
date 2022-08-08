@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Header, Text } from "@mantine/core";
+import { Group, Header, Text } from "@mantine/core";
 
 import useHeaderStyles from "./PageHeader.styles";
 
@@ -12,6 +12,14 @@ const PageHeader = () => {
       <Text component={Link} to="/" className={classes.title}>
         Segfault
       </Text>
+      <Group noWrap className={classes["link-group"]}>
+        <Text component={Link} to="/signup" className={classes.link}>
+          Sign Up
+        </Text>
+        <Text component={Link} to="/login" className={classes.link}>
+          Log In
+        </Text>
+      </Group>
     </Header>
   );
 };

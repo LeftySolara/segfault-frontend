@@ -15,6 +15,13 @@ const useHeaderStyles = createStyles((theme) => ({
     fontWeight: "bold",
     color: theme.colors["cool-grey"][6],
   },
+  "link-group": {
+    marginRight: "24px",
+  },
+  link: {
+    color: theme.colors["cool-grey"][6],
+    fontWeight: "bold",
+  },
 }));
 
 export default useHeaderStyles;

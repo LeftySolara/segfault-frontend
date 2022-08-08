@@ -12,5 +12,10 @@ describe("PageHeader", () => {
       const title = screen.getByText(/Segfault/i);
       expect(title).toBeInTheDocument();
     });
+
+    it("should display login and signup links", () => {
+      expect(screen.getByText(/Log In/i)).toBeInTheDocument();
+      expect(screen.getByText(/Sign Up/i)).toBeInTheDocument();
+    });
   });
 });
