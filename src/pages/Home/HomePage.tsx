@@ -1,4 +1,7 @@
 import React from "react";
+import { LoadingOverlay } from "@mantine/core";
+
+import { useGetBoardsQuery } from "services/board";
 
 import BoardCategoryGroup from "./BoardCategoryGroup/BoardCategoryGroup";
 
@@ -82,6 +85,8 @@ const boards = [
 ];
 
 const HomePage = (): JSX.Element => {
+  const { data: fetchedBoards, error, isLoading } = useGetBoardsQuery();
+
   const matchBoardsToCategories = () => {
     let categoryBoards;
     let boardCategory;
@@ -116,6 +121,7 @@ const HomePage = (): JSX.Element => {
 
   return (
     <>
+      <LoadingOverlay visible={isLoading} />
       {categories.map(
         (category: BoardCategory): JSX.Element => (
           <BoardCategoryGroup category={category} key={category.id} />
