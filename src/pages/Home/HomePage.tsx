@@ -4,7 +4,7 @@ import { LoadingOverlay } from "@mantine/core";
 import { useGetBoardsQuery } from "services/board";
 import type { Board, GetBoardsResponse } from "services/board";
 
-import BoardCategoryGroup from "./BoardCategoryGroup/BoardCategoryGroup";
+import BoardGroup from "./BoardGroup/BoardGroup";
 
 interface MappedBoard {
   id: string;

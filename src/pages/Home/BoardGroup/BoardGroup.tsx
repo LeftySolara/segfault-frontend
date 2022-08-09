@@ -16,11 +16,11 @@ interface BoardCategory {
   boards: Array<Board>;
 }
 
-interface BoardCategoryGroupProps {
+interface BoardGroupProps {
   category: BoardCategory;
 }
 
-const BoardCategoryGroup = (props: BoardCategoryGroupProps) => {
+const BoardGroup = (props: BoardGroupProps) => {
   const { category } = props;
 
   return (
@@ -37,4 +37,4 @@ const BoardCategoryGroup = (props: BoardCategoryGroupProps) => {
   );
 };
 
-export default BoardCategoryGroup;
+export default BoardGroup;
