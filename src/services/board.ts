@@ -11,11 +11,15 @@ export interface Board {
   };
 }
 
+export interface GetBoardsResponse {
+  boards: Array<Board>;
+}
+
 /** Query and mutation functions for interacting with board data. */
 const boardApi = api.injectEndpoints({
   endpoints: (builder) => ({
     /** Fetch all boards in the database. */
-    getBoards: builder.query<Board | undefined, void>({
+    getBoards: builder.query<GetBoardsResponse, void>({
       query: () => ({
         url: "/boards",
         method: "GET",
