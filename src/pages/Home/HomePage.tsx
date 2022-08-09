@@ -1,5 +1,20 @@
 import React from "react";
 
+import BoardCategoryGroup from "./BoardCategoryGroup/BoardCategoryGroup";
+
+interface Board {
+  id: string;
+  topic: string;
+  description: string;
+  threadCount: number;
+}
+
+interface BoardCategory {
+  id: string;
+  topic: string;
+  boards: Array<Board>;
+}
+
 const boardCategories = [
   {
     id: "0",
@@ -67,7 +82,47 @@ const boards = [
 ];
 
 const HomePage = (): JSX.Element => {
-  return <div />;
+  const matchBoardsToCategories = () => {
+    let categoryBoards;
+    let boardCategory;
+
+    const categories: Array<BoardCategory> = [];
+
+    boardCategories.forEach((category) => {
+      categoryBoards = boards
+        .filter((board) => board.category.id === category.id)
+        .map((board) => {
+          return {
+            id: board._id,
+            topic: board.topic,
+            description: board.description,
+            threadCount: board.threads.length,
+          };
+        });
+
+      boardCategory = {
+        id: category.id,
+        topic: category.topic,
+        boards: categoryBoards,
+      };
+
+      categories.push(boardCategory);
+    });
+
+    return categories;
+  };
+
+  const categories = matchBoardsToCategories();
+
+  return (
+    <>
+      {categories.map(
+        (category: BoardCategory): JSX.Element => (
+          <BoardCategoryGroup category={category} key={category.id} />
+        ),
+      )}
+    </>
+  );
 };
 
 export default HomePage;
