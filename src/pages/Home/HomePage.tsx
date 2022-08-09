@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { LoadingOverlay } from "@mantine/core";
 
 import { useGetBoardsQuery } from "services/board";
-import type { Board, GetBoardsResponse } from "services/board";
+import type { Board } from "services/board";
 
 import BoardGroup from "./BoardGroup/BoardGroup";
 
@@ -13,14 +13,15 @@ interface MappedBoard {
   threadCount: number;
 }
 
-interface BoardGroup {
+interface MappedBoardGroup {
   category: string;
   boards: Array<MappedBoard>;
 }
 
 const HomePage = (): JSX.Element => {
   const { data: fetchedBoards, isLoading } = useGetBoardsQuery();
-  let groupedBoards: Array<BoardGroup>;
+  const [groupedBoards, setGroupedBoards] =
+    useState<Array<MappedBoardGroup> | null>([]);
 
   /**
    * Group boards based on their categories.
@@ -38,7 +39,7 @@ const HomePage = (): JSX.Element => {
     const categories = [...new Set(boardCategories)];
 
     // Group boards based on their categories
-    const boardGroups: Array<BoardGroup> = [];
+    const boardGroups: Array<MappedBoardGroup> = [];
     categories.forEach((category) => {
       const categoryBoards = boards
         .filter((board) => board.category.topic === category)
@@ -58,14 +59,21 @@ const HomePage = (): JSX.Element => {
 
   useEffect(() => {
     if (fetchedBoards) {
-      groupedBoards = groupBoardsByCategory(fetchedBoards.boards);
+      setGroupedBoards(groupBoardsByCategory(fetchedBoards.boards));
     }
   }, [fetchedBoards]);
 
   return (
-    <div>
+    <>
       <LoadingOverlay visible={isLoading} />
-    </div>
+      {groupedBoards &&
+        groupedBoards.map((boardGroup) => (
+          <BoardGroup
+            category={boardGroup.category}
+            boards={boardGroup.boards}
+          />
+        ))}
+    </>
   );
 };
 

@@ -10,23 +10,18 @@ interface Board {
   threadCount: number;
 }
 
-interface BoardCategory {
-  id: string;
-  topic: string;
+interface BoardGroupProps {
+  category: string;
   boards: Array<Board>;
 }
 
-interface BoardGroupProps {
-  category: BoardCategory;
-}
-
 const BoardGroup = (props: BoardGroupProps) => {
-  const { category } = props;
+  const { category, boards } = props;
 
   return (
     <div>
-      <BoardCategoryTitle text={category.topic} key={category.id} />
-      {category.boards.map((board: Board) => (
+      <BoardCategoryTitle text={category} />
+      {boards.map((board: Board) => (
         <BoardCard
           topic={board.topic}
           description={board.description}
