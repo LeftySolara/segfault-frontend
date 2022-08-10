@@ -12,7 +12,10 @@ const RecentThreads = () => {
       <Title order={3} className={classes.title}>
         Recent Threads
       </Title>
-      <ThreadCard title="Testing" />
+      <ThreadCard
+        title="This is a test thread with a very long title so that we can test the line clamp and see if the text overflows"
+        author="LeftySolara"
+      />
     </div>
   );
 };
