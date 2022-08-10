@@ -5,6 +5,9 @@ import { useGetBoardsQuery } from "services/board";
 import type { Board } from "services/board";
 
 import BoardGroup from "./BoardGroup/BoardGroup";
+import RecentThreads from "./RecentThreads/RecentThreads";
+
+import useHomePageStyles from "./HomePage.styles";
 
 interface MappedBoard {
   id: string;
@@ -19,6 +22,7 @@ interface MappedBoardGroup {
 }
 
 const HomePage = (): JSX.Element => {
+  const { classes } = useHomePageStyles();
   const { data: fetchedBoards, isLoading } = useGetBoardsQuery();
   const [groupedBoards, setGroupedBoards] =
     useState<Array<MappedBoardGroup> | null>([]);
@@ -64,16 +68,19 @@ const HomePage = (): JSX.Element => {
   }, [fetchedBoards]);
 
   return (
-    <>
+    <div className={classes["content-container"]}>
       <LoadingOverlay visible={isLoading} />
-      {groupedBoards &&
-        groupedBoards.map((boardGroup) => (
-          <BoardGroup
-            category={boardGroup.category}
-            boards={boardGroup.boards}
-          />
-        ))}
-    </>
+      <div className={classes["board-group-container"]}>
+        {groupedBoards &&
+          groupedBoards.map((boardGroup) => (
+            <BoardGroup
+              category={boardGroup.category}
+              boards={boardGroup.boards}
+            />
+          ))}
+      </div>
+      <RecentThreads />
+    </div>
   );
 };
 
