@@ -16,6 +16,11 @@ const useThreadCardStyles = createStyles((theme) => ({
     fontWeight: "bold",
     color: theme.colors["cool-grey"][7],
   },
+  "secondary-text-container": {
+    display: "flex",
+    flexFlow: "row nowrap",
+    justifyContent: "space-between",
+  },
   "secondary-text": {
     fontFamily: "soleil",
     color: theme.colors["cool-grey"][5],

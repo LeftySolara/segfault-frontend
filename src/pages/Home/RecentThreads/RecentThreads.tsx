@@ -15,6 +15,7 @@ const RecentThreads = () => {
       <ThreadCard
         title="This is a test thread with a very long title so that we can test the line clamp and see if the text overflows"
         author="LeftySolara"
+        timestamp={new Date("2022-08-09T17:51:34.397Z")}
       />
     </div>
   );

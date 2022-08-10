@@ -1,17 +1,19 @@
 import React from "react";
 import { Paper, Text } from "@mantine/core";
 
+import { formatDistance } from "date-fns";
+
 import useThreadCardStyles from "./ThreadCard.styles";
 
 interface ThreadCardProps {
   title: string;
   author: string;
-  // timestamp: Date;
+  timestamp: Date;
 }
 
 const ThreadCard = (props: ThreadCardProps) => {
   const { classes } = useThreadCardStyles();
-  const { title, author } = props;
+  const { title, author, timestamp } = props;
 
   return (
     <Paper className={classes["thread-card"]} p="sm">
@@ -20,12 +22,17 @@ const ThreadCard = (props: ThreadCardProps) => {
           {title}
         </Text>
       </div>
-      <div>
+      <div className={classes["secondary-text-container"]}>
         <Text className={classes["secondary-text"]}>
           by{" "}
           <Text inherit component="span" className={classes.author}>
             {author}
           </Text>
+        </Text>
+        <Text className={classes["secondary-text"]}>
+          {formatDistance(timestamp, new Date(), {
+            addSuffix: true,
+          })}
         </Text>
       </div>
     </Paper>
