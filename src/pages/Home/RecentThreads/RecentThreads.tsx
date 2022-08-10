@@ -2,14 +2,18 @@ import React from "react";
 import { Title } from "@mantine/core";
 
 import useRecentThreadsStyles from "./RecentThreads.styles";
+import ThreadCard from "../ThreadCard/ThreadCard";
 
 const RecentThreads = () => {
   const { classes } = useRecentThreadsStyles();
 
   return (
-    <Title order={3} className={classes.title}>
-      Recent Threads
-    </Title>
+    <div className={classes.container}>
+      <Title order={3} className={classes.title}>
+        Recent Threads
+      </Title>
+      <ThreadCard title="Testing" />
+    </div>
   );
 };
 
