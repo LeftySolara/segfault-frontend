@@ -23,6 +23,7 @@ const BoardGroup = (props: BoardGroupProps) => {
       <BoardCategoryTitle text={category} />
       {boards.map((board: Board) => (
         <BoardCard
+          id={board.id}
           topic={board.topic}
           description={board.description}
           threadCount={board.threadCount}

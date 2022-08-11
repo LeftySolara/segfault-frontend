@@ -1,22 +1,30 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Paper, Text } from "@mantine/core";
 
 import useBoardCardStyles from "./BoardCard.styles";
 
 interface BoardCardProps {
+  id: string;
   topic: string;
   description: string;
   threadCount: number;
 }
 
 const BoardCard = (props: BoardCardProps) => {
-  const { topic, description, threadCount } = props;
+  const { id, topic, description, threadCount } = props;
   const { classes } = useBoardCardStyles();
 
   return (
     <Paper className={classes["board-card"]} p="sm">
       <div className={classes["board-title-group"]}>
-        <Text className={classes["board-title"]}>{topic}</Text>
+        <Text
+          className={classes["board-title"]}
+          component={Link}
+          to={`/board/${id}`}
+        >
+          {topic}
+        </Text>
         <Text className={classes["board-description"]}>{description}</Text>
       </div>
       <div className={classes["board-thread-group"]}>
