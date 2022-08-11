@@ -32,7 +32,6 @@ const threadApi = api.injectEndpoints({
     >({
       query: (arg) => {
         const { sortField, sortDirection, limit } = arg;
-        console.log(arg);
         return {
           url: "/threads",
           method: "GET",

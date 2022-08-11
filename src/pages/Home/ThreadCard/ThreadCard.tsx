@@ -1,5 +1,5 @@
 import React from "react";
-import { Paper, Text } from "@mantine/core";
+import { Paper, Text, Tooltip } from "@mantine/core";
 
 import { formatDistance } from "date-fns";
 
@@ -29,11 +29,13 @@ const ThreadCard = (props: ThreadCardProps) => {
             {author}
           </Text>
         </Text>
-        <Text className={classes["secondary-text"]}>
-          {formatDistance(timestamp, new Date(), {
-            addSuffix: true,
-          })}
-        </Text>
+        <Tooltip label={timestamp.toLocaleString()}>
+          <Text className={classes["secondary-text"]}>
+            {formatDistance(timestamp, new Date(), {
+              addSuffix: true,
+            })}
+          </Text>
+        </Tooltip>
       </div>
     </Paper>
   );
