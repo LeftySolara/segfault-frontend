@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Paper, Text, Tooltip } from "@mantine/core";
 
 import { formatDistance } from "date-fns";
@@ -6,6 +7,7 @@ import { formatDistance } from "date-fns";
 import useThreadCardStyles from "./ThreadCard.styles";
 
 interface ThreadCardProps {
+  id: string;
   title: string;
   author: string;
   timestamp: Date;
@@ -13,12 +15,17 @@ interface ThreadCardProps {
 
 const ThreadCard = (props: ThreadCardProps) => {
   const { classes } = useThreadCardStyles();
-  const { title, author, timestamp } = props;
+  const { id, title, author, timestamp } = props;
 
   return (
     <Paper className={classes["thread-card"]} p="sm">
       <div>
-        <Text className={classes["thread-title"]} lineClamp={2}>
+        <Text
+          className={classes["thread-title"]}
+          lineClamp={2}
+          component={Link}
+          to={`/thread/${id}`}
+        >
           {title}
         </Text>
       </div>

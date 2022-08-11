@@ -23,6 +23,7 @@ const RecentThreads = () => {
       {fetchedThreads &&
         fetchedThreads.threads.map((thread) => (
           <ThreadCard
+            id={thread.id}
             title={thread.topic}
             author={thread.author.username}
             timestamp={new Date(thread.dateCreated)}
