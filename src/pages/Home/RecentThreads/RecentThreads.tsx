@@ -26,6 +26,7 @@ const RecentThreads = () => {
             title={thread.topic}
             author={thread.author.username}
             timestamp={new Date(thread.dateCreated)}
+            key={thread.id}
           />
         ))}
     </div>
