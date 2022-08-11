@@ -76,6 +76,7 @@ const HomePage = (): JSX.Element => {
             <BoardGroup
               category={boardGroup.category}
               boards={boardGroup.boards}
+              key={boardGroup.category}
             />
           ))}
       </div>

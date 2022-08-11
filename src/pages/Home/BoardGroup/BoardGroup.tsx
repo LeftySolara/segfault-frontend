@@ -26,6 +26,7 @@ const BoardGroup = (props: BoardGroupProps) => {
           topic={board.topic}
           description={board.description}
           threadCount={board.threadCount}
+          key={board.id}
         />
       ))}
     </div>
