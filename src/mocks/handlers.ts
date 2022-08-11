@@ -99,8 +99,17 @@ const handleSignup = async (
   return response;
 };
 
+const handleLogout = async (
+  req: RestRequest<never, PathParams<string>>,
+  res: ResponseComposition<DefaultBodyType>,
+  ctx: RestContext,
+) => {
+  return res(ctx.status(200), ctx.json({ message: "Successfully logged out" }));
+};
+
 export const handlers = [
   rest.get(`${API_ENDPOINT}/auth/user`, handleAuthCheck),
   rest.post(`${API_ENDPOINT}/auth/login`, handleLogin),
+  rest.get(`${API_ENDPOINT}/auth/logout`, handleLogout),
   rest.post(`${API_ENDPOINT}/users`, handleSignup),
 ];
