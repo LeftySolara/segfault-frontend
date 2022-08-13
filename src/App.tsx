@@ -8,12 +8,14 @@ import { setCredentials } from "store/auth/auth.slice";
 import HomePage from "pages/Home/HomePage";
 import LoginPage from "pages/Login/LoginPage";
 import SignupPage from "pages/Signup/SignupPage";
+import BoardPage from "pages/Board/BoardPage";
 
 const routes = (
   <Routes>
     <Route index element={<HomePage />} />
     <Route path="login" element={<LoginPage />} />
     <Route path="signup" element={<SignupPage />} />
+    <Route path="board/:id" element={<BoardPage />} />
   </Routes>
 );
 
