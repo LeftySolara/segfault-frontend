@@ -40,6 +40,20 @@ const threadApi = api.injectEndpoints({
         };
       },
     }),
+    getThreadsByBoard: builder.query<
+      GetThreadsResponse,
+      { id: string; sortField: string; sortDirection: string; limit: number }
+    >({
+      query: (arg) => {
+        const { id, sortField, sortDirection, limit } = arg;
+        return {
+          url: `/threads/board/${id}`,
+          method: "GET",
+          credentials: "include",
+          params: { sort: `${sortField}:${sortDirection}`, limit },
+        };
+      },
+    }),
   }),
   overrideExisting: false,
 });
