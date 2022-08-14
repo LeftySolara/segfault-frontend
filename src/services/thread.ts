@@ -58,4 +58,4 @@ const threadApi = api.injectEndpoints({
   overrideExisting: false,
 });
 
-export const { useGetThreadsQuery } = threadApi;
+export const { useGetThreadsQuery, useGetThreadsByBoardQuery } = threadApi;

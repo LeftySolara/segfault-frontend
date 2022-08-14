@@ -1,9 +1,11 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import ThreadList from "./ThreadList/ThreadList";
 
 const BoardPage = () => {
   const { id } = useParams();
-  return <h1>Board Page: {id}</h1>;
+
+  return <div>{id && <ThreadList boardId={id} />}</div>;
 };
 
 export default BoardPage;
