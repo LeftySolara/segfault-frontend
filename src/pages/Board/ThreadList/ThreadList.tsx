@@ -1,4 +1,4 @@
-import { Box, Table } from "@mantine/core";
+import { Box, Table, Text } from "@mantine/core";
 import React from "react";
 import { useGetThreadsByBoardQuery } from "services/thread";
 import useThreadListStyles from "./ThreadList.styles";
@@ -6,6 +6,22 @@ import useThreadListStyles from "./ThreadList.styles";
 interface ThreadListProps {
   boardId: string;
 }
+
+interface ThreadTopicProps {
+  topic: string;
+  author: string;
+}
+
+const ThreadTopic = (props: ThreadTopicProps) => {
+  const { topic, author } = props;
+
+  return (
+    <div>
+      <Text>{topic}</Text>
+      <Text>by {author}</Text>
+    </div>
+  );
+};
 
 const ThreadList = (props: ThreadListProps) => {
   const { boardId } = props;
@@ -33,9 +49,11 @@ const ThreadList = (props: ThreadListProps) => {
   const rows = fetchedThreads.threads.map((thread) => {
     return (
       <tr key={thread.id}>
-        <td>{thread.topic}</td>
+        <td>
+          <ThreadTopic topic={thread.topic} author={thread.author.username} />
+        </td>
         <td>{thread.posts.length}</td>
-        <td>{thread.lastPost}</td>
+        <td>{new Date(thread.lastPost).toLocaleString()}</td>
       </tr>
     );
   });
