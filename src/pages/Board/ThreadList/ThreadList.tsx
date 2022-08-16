@@ -1,6 +1,6 @@
+import React from "react";
 import { Box, Table, Text } from "@mantine/core";
 import { Link } from "react-router-dom";
-import React from "react";
 import { useGetThreadsByBoardQuery } from "services/thread";
 import useThreadListStyles from "./ThreadList.styles";
 
@@ -45,7 +45,7 @@ const ThreadList = (props: ThreadListProps) => {
   const tableHeaders = (
     <tr>
       <th>Topic</th>
-      <th>Posts</th>
+      <th>Replies</th>
       <th>Last Post</th>
     </tr>
   );
@@ -60,7 +60,7 @@ const ThreadList = (props: ThreadListProps) => {
             id={thread.id}
           />
         </td>
-        <td>{thread.posts.length}</td>
+        <td>{thread.posts.length - 1}</td>
         <td>{new Date(thread.lastPost).toLocaleString()}</td>
       </tr>
     );
