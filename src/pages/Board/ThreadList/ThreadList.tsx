@@ -16,13 +16,23 @@ interface ThreadTopicProps {
 
 const ThreadTopic = (props: ThreadTopicProps) => {
   const { topic, author, id } = props;
+  const { classes } = useThreadListStyles();
 
   return (
     <div>
-      <Text component={Link} to={`/thread/${id}`}>
+      <Text
+        component={Link}
+        to={`/thread/${id}`}
+        className={classes["topic-text"]}
+      >
         {topic}
       </Text>
-      <Text>by {author}</Text>
+      <Text className={classes["author-line"]}>
+        by{" "}
+        <Text inherit component="span" className={classes.author}>
+          {author}
+        </Text>
+      </Text>
     </div>
   );
 };
@@ -44,9 +54,15 @@ const ThreadList = (props: ThreadListProps) => {
 
   const tableHeaders = (
     <tr>
-      <th>Topic</th>
-      <th>Replies</th>
-      <th>Last Post</th>
+      <th>
+        <Text className={classes["table-header"]}>Topic</Text>
+      </th>
+      <th>
+        <Text className={classes["table-header"]}>Replies</Text>
+      </th>
+      <th>
+        <Text className={classes["table-header"]}>Last Post</Text>
+      </th>
     </tr>
   );
 
@@ -60,15 +76,23 @@ const ThreadList = (props: ThreadListProps) => {
             id={thread.id}
           />
         </td>
-        <td>{thread.posts.length - 1}</td>
-        <td>{new Date(thread.lastPost).toLocaleString()}</td>
+        <td>
+          <Text className={classes["reply-count"]}>
+            {thread.posts.length - 1}
+          </Text>
+        </td>
+        <td>
+          <Text className={classes["last-post"]}>
+            {new Date(thread.lastPost).toLocaleString()}
+          </Text>
+        </td>
       </tr>
     );
   });
 
   return (
     <Box>
-      <Table striped>
+      <Table striped verticalSpacing="xs">
         <thead>{tableHeaders}</thead>
         <tbody>{rows}</tbody>
       </Table>
