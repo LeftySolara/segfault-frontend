@@ -1,4 +1,5 @@
 import { Box, Table, Text } from "@mantine/core";
+import { Link } from "react-router-dom";
 import React from "react";
 import { useGetThreadsByBoardQuery } from "services/thread";
 import useThreadListStyles from "./ThreadList.styles";
@@ -10,14 +11,17 @@ interface ThreadListProps {
 interface ThreadTopicProps {
   topic: string;
   author: string;
+  id: string;
 }
 
 const ThreadTopic = (props: ThreadTopicProps) => {
-  const { topic, author } = props;
+  const { topic, author, id } = props;
 
   return (
     <div>
-      <Text>{topic}</Text>
+      <Text component={Link} to={`/thread/${id}`}>
+        {topic}
+      </Text>
       <Text>by {author}</Text>
     </div>
   );
@@ -50,7 +54,11 @@ const ThreadList = (props: ThreadListProps) => {
     return (
       <tr key={thread.id}>
         <td>
-          <ThreadTopic topic={thread.topic} author={thread.author.username} />
+          <ThreadTopic
+            topic={thread.topic}
+            author={thread.author.username}
+            id={thread.id}
+          />
         </td>
         <td>{thread.posts.length}</td>
         <td>{new Date(thread.lastPost).toLocaleString()}</td>
