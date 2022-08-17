@@ -2,6 +2,8 @@ import React from "react";
 import { Button, Breadcrumbs, Text } from "@mantine/core";
 import { Link, useParams } from "react-router-dom";
 import { useGetBoardByIdQuery } from "services/board";
+import { useAppSelector } from "hooks/reduxHooks";
+import { selectCurrentUser } from "store/auth/auth.slice";
 import ThreadList from "./ThreadList/ThreadList";
 
 import useBoardPageStyles from "./BoardPage.styles";
@@ -9,6 +11,7 @@ import useBoardPageStyles from "./BoardPage.styles";
 const BoardPage = () => {
   const { id } = useParams();
   const { classes } = useBoardPageStyles();
+  const user = useAppSelector(selectCurrentUser);
 
   const { data: fetchedBoard } = useGetBoardByIdQuery({ id });
 
@@ -30,7 +33,10 @@ const BoardPage = () => {
     <div>
       <div className={classes.header}>
         <Breadcrumbs className={classes.anchor}>{crumbs}</Breadcrumbs>
-        <Button component={Link} to={`/board/${id}/newThread`}>
+        <Button
+          component={Link}
+          to={user ? `/board/${id}/newThread` : "/login"}
+        >
           New Thread
         </Button>
       </div>
