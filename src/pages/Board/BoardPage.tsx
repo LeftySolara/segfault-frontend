@@ -1,5 +1,5 @@
 import React from "react";
-import { Breadcrumbs, Text } from "@mantine/core";
+import { Button, Breadcrumbs, Text } from "@mantine/core";
 import { Link, useParams } from "react-router-dom";
 import { useGetBoardByIdQuery } from "services/board";
 import ThreadList from "./ThreadList/ThreadList";
@@ -28,7 +28,12 @@ const BoardPage = () => {
 
   return (
     <div>
-      <Breadcrumbs className={classes.anchor}>{crumbs}</Breadcrumbs>
+      <div className={classes.header}>
+        <Breadcrumbs className={classes.anchor}>{crumbs}</Breadcrumbs>
+        <Button component={Link} to={`/board/${id}/newThread`}>
+          New Thread
+        </Button>
+      </div>
       {id && <ThreadList boardId={id} />}
     </div>
   );
