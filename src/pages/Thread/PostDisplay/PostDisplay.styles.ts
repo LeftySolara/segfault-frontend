@@ -26,6 +26,7 @@ const usePostDisplayStyles = createStyles((theme) => ({
     fontFamily: "proxima-nova",
     fontSize: "24px",
     fontWeight: "bold",
+    color: theme.colors["cool-grey"][7],
   },
   "user-info-container": {
     width: "350px",
@@ -37,6 +38,7 @@ const usePostDisplayStyles = createStyles((theme) => ({
   "user-info-text": {
     fontFamily: "proxima-nova",
     fontSize: "24px",
+    color: theme.colors["cool-grey"][7],
   },
   "content-container": {
     padding: "10px",
@@ -44,6 +46,7 @@ const usePostDisplayStyles = createStyles((theme) => ({
   content: {
     fontFamily: "proxima-nova",
     fontSize: "24px",
+    color: theme.colors["cool-grey"][7],
   },
   timestamp: {
     fontFamily: "proxima-nova",
