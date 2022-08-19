@@ -6,12 +6,14 @@ export interface Post {
     authorId: string;
     username: string;
     email: string;
+    joinDate: Date;
+    postCount: number;
   };
   thread: {
     threadId: string;
     topic: string;
   };
-  dateCreated: string;
+  dateCreated: Date;
   content: string;
 }
 
