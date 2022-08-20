@@ -59,4 +59,4 @@ const postApi = api.injectEndpoints({
   overrideExisting: false,
 });
 
-export const { useGetPostsByThreadQuery } = postApi;
+export const { useGetPostsByThreadQuery, useCreatePostMutation } = postApi;

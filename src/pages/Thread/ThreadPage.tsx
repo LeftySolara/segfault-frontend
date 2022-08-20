@@ -31,7 +31,7 @@ const ThreadPage = () => {
       </div>
       <div className={classes["bottom-container"]}>
         {user ? (
-          <PostEditor />
+          <PostEditor authorId={user.id} threadId={id} />
         ) : (
           <Text className={classes["login-message-text"]}>
             You must log in to post
