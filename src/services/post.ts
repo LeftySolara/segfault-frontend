@@ -21,6 +21,12 @@ export interface GetPostsByThreadResponse {
   posts: Array<Post>;
 }
 
+export interface CreatePostRequest {
+  content: string;
+  authorId: string;
+  threadId: string;
+}
+
 const postApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getPostsByThread: builder.query<
@@ -35,6 +41,19 @@ const postApi = api.injectEndpoints({
           credentials: "include",
         };
       },
+    }),
+    createPost: builder.mutation<Post, CreatePostRequest>({
+      query: ({ content, threadId, authorId }) => ({
+        url: "posts",
+        method: "POST",
+        body: {
+          content,
+          threadId,
+          authorId,
+        },
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+      }),
     }),
   }),
   overrideExisting: false,
