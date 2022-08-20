@@ -5,6 +5,7 @@ import { useGetPostsByThreadQuery } from "services/post";
 import { useAppSelector } from "hooks/reduxHooks";
 import { selectCurrentUser } from "store/auth/auth.slice";
 import PostDisplay from "./PostDisplay/PostDisplay";
+import PostEditor from "./PostEditor/PostEditor";
 import useThreadPageStyles from "./ThreadPage.styles";
 
 const ThreadPage = () => {
@@ -30,7 +31,7 @@ const ThreadPage = () => {
       </div>
       <div className={classes["bottom-container"]}>
         {user ? (
-          <Text>Logged In As {user.username}</Text>
+          <PostEditor />
         ) : (
           <Text className={classes["login-message-text"]}>
             You must log in to post
