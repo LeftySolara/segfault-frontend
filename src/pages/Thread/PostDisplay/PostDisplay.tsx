@@ -1,11 +1,13 @@
+/* eslint-disable react/no-danger */
 import React from "react";
 import { Paper, Text, TypographyStylesProvider } from "@mantine/core";
+import DOMPurify from "dompurify";
 
 import usePostDisplayStyles from "./PostDisplay.styles";
 
 interface PostDisplayProps {
   author: string | undefined;
-  content: string | undefined;
+  content: string;
   timeStamp: Date | undefined;
   joinDate: Date | undefined;
 }
@@ -13,6 +15,10 @@ interface PostDisplayProps {
 const PostDisplay = (props: PostDisplayProps) => {
   const { author, content, timeStamp, joinDate } = props;
   const { classes } = usePostDisplayStyles();
+
+  const sanitizedContent = {
+    __html: DOMPurify.sanitize(content),
+  };
 
   return (
     <Paper className={classes.container}>
@@ -36,7 +42,7 @@ const PostDisplay = (props: PostDisplayProps) => {
         </div>
         <div className={classes["content-container"]}>
           <TypographyStylesProvider>
-            <div dangerouslySetInnerHTML={{ __html: content }} />
+            <div dangerouslySetInnerHTML={sanitizedContent} />
           </TypographyStylesProvider>
         </div>
       </div>
