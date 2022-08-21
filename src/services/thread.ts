@@ -23,6 +23,13 @@ export interface GetThreadsResponse {
   threads: Array<Thread>;
 }
 
+export interface CreateThreadRequest {
+  topic: string;
+  authorId: string;
+  boardId: string;
+  content: string;
+}
+
 const threadApi = api.injectEndpoints({
   endpoints: (builder) => ({
     /** Fetch all threads in the database */
@@ -54,8 +61,26 @@ const threadApi = api.injectEndpoints({
         };
       },
     }),
+    createThread: builder.mutation<Thread, CreateThreadRequest>({
+      query: ({ topic, authorId, boardId, content }) => ({
+        url: "threads",
+        method: "POST",
+        body: {
+          topic,
+          authorId,
+          boardId,
+          content,
+        },
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+      }),
+    }),
   }),
   overrideExisting: false,
 });
 
-export const { useGetThreadsQuery, useGetThreadsByBoardQuery } = threadApi;
+export const {
+  useGetThreadsQuery,
+  useGetThreadsByBoardQuery,
+  useCreateThreadMutation,
+} = threadApi;

@@ -2,24 +2,41 @@ import React, { FormEvent, useState } from "react";
 import { Button, Text, TextInput } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 import RichTextEditor from "@mantine/rte";
+import { useCreateThreadMutation } from "services/thread";
 import useNewThreadFormStyles from "./NewThreadForm.styles";
 
 interface NewThreadFormProps {
   boardId: string;
+  authorId: string;
 }
 
 const NewThreadForm = (props: NewThreadFormProps) => {
-  const { boardId } = props;
+  const { boardId, authorId } = props;
 
   const navigate = useNavigate();
   const { classes } = useNewThreadFormStyles();
 
   const [topic, setTopic] = useState("");
   const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
 
-  const handleSubmit = (event: FormEvent) => {
+  const [createThread] = useCreateThreadMutation();
+
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    console.log(`topic: ${topic}\nmessage: ${message}`);
+
+    try {
+      await createThread({
+        topic,
+        boardId,
+        authorId,
+        content: message,
+      }).unwrap();
+      navigate(`/board/${boardId}`, { replace: false });
+      window.location.reload();
+    } catch (err: unknown) {
+      setError("An unknown error occurred");
+    }
   };
 
   const handleCancel = (event: FormEvent) => {
@@ -62,6 +79,7 @@ const NewThreadForm = (props: NewThreadFormProps) => {
           Cancel
         </Button>
       </form>
+      {error && <Text>{error}</Text>}
     </div>
   );
 };
