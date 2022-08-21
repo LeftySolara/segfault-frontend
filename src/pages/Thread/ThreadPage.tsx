@@ -14,6 +14,14 @@ const ThreadPage = () => {
   const { classes } = useThreadPageStyles();
   const user = useAppSelector(selectCurrentUser);
 
+  if (!data || !data.posts[0]) {
+    return (
+      <div>
+        <Text className={classes["message-text"]}>No posts found</Text>
+      </div>
+    );
+  }
+
   return (
     <>
       <Title order={2} className={classes.title}>
@@ -36,7 +44,7 @@ const ThreadPage = () => {
         {user ? (
           <PostEditor authorId={user.id} threadId={id} />
         ) : (
-          <Text className={classes["login-message-text"]}>
+          <Text className={classes["message-text"]}>
             You must log in to post
           </Text>
         )}

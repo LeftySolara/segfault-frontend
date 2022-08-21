@@ -12,7 +12,7 @@ const useThreadPageStyles = createStyles((theme) => ({
     justifyContent: "center",
     padding: "10px",
   },
-  "login-message-text": {
+  "message-text": {
     fontFamily: "proxima-nova",
     color: theme.colors["cool-grey"][6],
   },
