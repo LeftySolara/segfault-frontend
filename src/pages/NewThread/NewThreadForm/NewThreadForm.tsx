@@ -1,17 +1,30 @@
 import React, { FormEvent, useState } from "react";
 import { Button, Text, TextInput } from "@mantine/core";
+import { useNavigate } from "react-router-dom";
 import RichTextEditor from "@mantine/rte";
 import useNewThreadFormStyles from "./NewThreadForm.styles";
 
-const NewThreadForm = () => {
+interface NewThreadFormProps {
+  boardId: string;
+}
+
+const NewThreadForm = (props: NewThreadFormProps) => {
+  const { boardId } = props;
+
+  const navigate = useNavigate();
+  const { classes } = useNewThreadFormStyles();
+
   const [topic, setTopic] = useState("");
   const [message, setMessage] = useState("");
-
-  const { classes } = useNewThreadFormStyles();
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     console.log(`topic: ${topic}\nmessage: ${message}`);
+  };
+
+  const handleCancel = (event: FormEvent) => {
+    event.preventDefault();
+    navigate(`/board/${boardId}`, { replace: false });
   };
 
   return (
@@ -37,8 +50,16 @@ const NewThreadForm = () => {
           onChange={setMessage}
           className={classes.rte}
         />
-        <Button type="submit" className={classes.button}>
+        <Button type="submit" className={classes["submit-button"]}>
           Submit
+        </Button>
+        <Button
+          type="button"
+          className={classes["cancel-button"]}
+          variant="outline"
+          onClick={handleCancel}
+        >
+          Cancel
         </Button>
       </form>
     </div>

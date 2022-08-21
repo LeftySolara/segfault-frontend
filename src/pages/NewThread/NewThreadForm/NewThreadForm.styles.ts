@@ -25,8 +25,11 @@ const useNewThreadFormStyles = createStyles((theme) => ({
     height: "512px",
     fontFamily: "proxima-nova",
   },
-  button: {
+  "submit-button": {
     marginTop: "24px",
+  },
+  "cancel-button": {
+    marginLeft: "24px",
   },
 }));
 
