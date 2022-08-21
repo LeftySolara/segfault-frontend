@@ -23,7 +23,7 @@ const ThreadPage = () => {
               <PostDisplay
                 author={post.author.username}
                 content={post.content}
-                timeStamp={post.dateCreated}
+                timestamp={post.dateCreated}
                 joinDate={post.author.joinDate}
               />
             );
