@@ -9,6 +9,7 @@ import HomePage from "pages/Home/HomePage";
 import LoginPage from "pages/Login/LoginPage";
 import SignupPage from "pages/Signup/SignupPage";
 import BoardPage from "pages/Board/BoardPage";
+import ThreadPage from "pages/Thread/ThreadPage";
 
 const routes = (
   <Routes>
@@ -16,6 +17,7 @@ const routes = (
     <Route path="login" element={<LoginPage />} />
     <Route path="signup" element={<SignupPage />} />
     <Route path="board/:id" element={<BoardPage />} />
+    <Route path="thread/:id" element={<ThreadPage />} />
   </Routes>
 );
 
