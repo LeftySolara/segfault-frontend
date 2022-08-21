@@ -1,5 +1,5 @@
 import React from "react";
-import { Paper, Text } from "@mantine/core";
+import { Paper, Text, TypographyStylesProvider } from "@mantine/core";
 
 import usePostDisplayStyles from "./PostDisplay.styles";
 
@@ -35,7 +35,9 @@ const PostDisplay = (props: PostDisplayProps) => {
           </div>
         </div>
         <div className={classes["content-container"]}>
-          <Text className={classes.content}>{content}</Text>
+          <TypographyStylesProvider>
+            <div dangerouslySetInnerHTML={{ __html: content }} />
+          </TypographyStylesProvider>
         </div>
       </div>
     </Paper>
