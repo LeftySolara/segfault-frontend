@@ -9,7 +9,7 @@ const NewThreadPage = () => {
   return (
     <div>
       <Title order={1} className={classes.title}>
-        New Thread
+        Post New Thread
       </Title>
       <NewThreadForm />
     </div>
