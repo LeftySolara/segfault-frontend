@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Text } from "@mantine/core";
+import { Text, Title } from "@mantine/core";
 import { useGetPostsByThreadQuery } from "services/post";
 import { useAppSelector } from "hooks/reduxHooks";
 import { selectCurrentUser } from "store/auth/auth.slice";
@@ -16,6 +16,9 @@ const ThreadPage = () => {
 
   return (
     <>
+      <Title order={2} className={classes.title}>
+        {data?.posts[0].thread.topic}
+      </Title>
       <div>
         {data &&
           data.posts.map((post) => {
