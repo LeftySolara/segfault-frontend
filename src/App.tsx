@@ -10,12 +10,14 @@ import LoginPage from "pages/Login/LoginPage";
 import SignupPage from "pages/Signup/SignupPage";
 import BoardPage from "pages/Board/BoardPage";
 import ThreadPage from "pages/Thread/ThreadPage";
+import NewThreadPage from "pages/NewThread/NewThreadPage";
 
 const routes = (
   <Routes>
     <Route index element={<HomePage />} />
     <Route path="login" element={<LoginPage />} />
     <Route path="signup" element={<SignupPage />} />
+    <Route path="board/:id/newThread" element={<NewThreadPage />} />
     <Route path="board/:id" element={<BoardPage />} />
     <Route path="thread/:id" element={<ThreadPage />} />
   </Routes>
